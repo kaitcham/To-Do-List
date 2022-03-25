@@ -1,15 +1,15 @@
-import checkedOnLoad from "./checked.js";
+import checkedOnLoad from './checked.js';
 
-const input = document.querySelector(".form-input input");
-const checkbox = document.querySelector(".form-checkbox");
+const input = document.querySelector('.form-input input');
+const checkbox = document.querySelector('.form-checkbox');
 
-let tasks = JSON.parse(localStorage.getItem("tasksData"));
+let tasks = JSON.parse(localStorage.getItem('tasksData'));
 if (tasks === null) {
   tasks = [];
 }
 
 const displayTasks = () => {
-  let taskCode = "";
+  let taskCode = '';
   tasks.forEach((task) => {
     const { taskIndex, description } = task;
     taskCode += `
@@ -23,11 +23,11 @@ const displayTasks = () => {
   });
   checkbox.innerHTML = taskCode;
   checkedOnLoad();
-  localStorage.setItem("tasksData", JSON.stringify(tasks));
+  localStorage.setItem('tasksData', JSON.stringify(tasks));
 };
 
-input.addEventListener("keypress", (event) => {
-  if (event.keyCode === 13 && input.value !== "") {
+input.addEventListener('keypress', (event) => {
+  if (event.keyCode === 13 && input.value !== '') {
     event.preventDefault();
     const task = {
       taskIndex: tasks.length + 1,
@@ -36,14 +36,14 @@ input.addEventListener("keypress", (event) => {
     };
     tasks.push(task);
     displayTasks();
-    input.value = "";
+    input.value = '';
   }
 });
 
-checkbox.addEventListener("keypress", (event) => {
-  if (event.target.classList.contains("edit")) {
+checkbox.addEventListener('keypress', (event) => {
+  if (event.target.classList.contains('edit')) {
     const edit = event.target.id - 1;
-    if (event.keyCode === 13 && event.target.textContent !== "") {
+    if (event.keyCode === 13 && event.target.textContent !== '') {
       tasks[edit].description = event.target.textContent;
       displayTasks();
     }
@@ -55,21 +55,21 @@ window.removeList = (taskIndex) => {
   tasks.forEach((task, index) => {
     task.taskIndex = index + 1;
   });
-  localStorage.setItem("tasksData", JSON.stringify(tasks));
+  localStorage.setItem('tasksData', JSON.stringify(tasks));
   displayTasks();
 };
 
-checkbox.addEventListener("click", (event) => {
-  if (event.target.classList.contains("larger")) {
+checkbox.addEventListener('click', (event) => {
+  if (event.target.classList.contains('larger')) {
     const checked = event.target.id - 1;
-    if (event.target.getAttribute("checked") === null) {
-      event.target.setAttribute("checked", "true");
+    if (event.target.getAttribute('checked') === null) {
+      event.target.setAttribute('checked', 'true');
       tasks[checked].completed = true;
-      localStorage.setItem("tasksData", JSON.stringify(tasks));
+      localStorage.setItem('tasksData', JSON.stringify(tasks));
     } else {
-      event.target.removeAttribute("checked");
+      event.target.removeAttribute('checked');
       tasks[checked].completed = false;
-      localStorage.setItem("tasksData", JSON.stringify(tasks));
+      localStorage.setItem('tasksData', JSON.stringify(tasks));
     }
   }
 });
@@ -80,9 +80,9 @@ window.clearAll = () => {
     task.taskIndex = index + 1;
   });
   displayTasks();
-  localStorage.setItem("tasksData", JSON.stringify(tasks));
+  localStorage.setItem('tasksData', JSON.stringify(tasks));
 };
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('DOMContentLoaded', () => {
   displayTasks();
 });
