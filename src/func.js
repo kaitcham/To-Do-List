@@ -79,8 +79,8 @@ window.clearAll = () => {
   tasks.forEach((task, index) => {
     task.taskIndex = index + 1;
   });
-  displayTasks();
   localStorage.setItem('tasksData', JSON.stringify(tasks));
+  displayTasks();
 };
 
 window.addEventListener('DOMContentLoaded', () => {
