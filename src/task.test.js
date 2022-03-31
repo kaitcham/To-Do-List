@@ -45,4 +45,23 @@ describe('add and remove', () => {
     removeTask.deleteTask(1);
     expect(removeTask.list).toHaveLength(2);
   });
+
+  test('edit task', () => {
+    const updateList = new TaskList();
+    updateList.editTask(1, 'Testing');
+    expect(updateList.list[1].description).toMatch(/Testing/);
+  });
+
+  test('update task', () => {
+    const updateList = new TaskList();
+    updateList.addTask('Test');
+    updateList.updateStatus(1);
+    expect(updateList.list[1].completed).toBe(true);
+  });
+
+  test('clear all completed', () => {
+    const updateList = new TaskList();
+    updateList.clearCompleted();
+    expect(updateList.list).toHaveLength(2);
+  });
 });
